@@ -1,21 +1,23 @@
 # Variant Calling Workflows
-Last update: 2020-09-15
+Last update: 2021-01-27
 
 There are workflows for germline or somatic variant calling based on GATK Best Practices Workflows.
 It includes:
 
+* Preparing required files: prepareFiles.sh
 * Data Pre-processing: dataPreprocess.sh
-* Germline variant calling for single-sample: haplotypeCallersSS.sh [WIP]
+* Germline variant calling for single-sample: haplotypeCallersSS.sh
 * Somatic variant calling for single-sample: mutect2.sh
-* Variant annotation: annotation.sh
+* Variant recalibration using VQSR (only for human samples): variantRecal.sh
+* Variant annotation using VEP: varAnnotate.sh
 
-![Somatic variant calling](somatic.png)
+![Variant calling workflows](germline_somaticVC.png)
 
 ## Environment and dependencies:
-* gatk4         v4.1.8.1
-* bcftools      v1.10.2
+* gatk4         v4.1.9.0
+* bcftools      v1.11
 * picard        v2.23.4
-* ensembl-vep   v100.3
+* ensembl-vep   v101.0
 
 ## Input
 * Paired-end fastq data

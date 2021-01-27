@@ -1,35 +1,27 @@
-#! /bin/bash
+#!/bin/basha
 
-# This script is for single-sample data variant calling using GATK (HaplotypeCaller).
 
 # Author: PJ Wu
-# Last update: 2020-09-15
+# Last update: 2021-01-26
+
+# This script is for single-sample data variant calling using GATK (HaplotypeCaller)
 
 # Reference
 GENOME_PATH="PATH-to-GENOME-FASTA"
-DBSNP="PAHT-to-DBSNP"
+KNOWN_VARIANTS_PATH="PATH-to-KNOWN-VARIANTS"
 
 # Dataset
 DATA_PATH="PATH-to-ANAYSIS-READY-BAM"
 INTERVALS="PATH-to-INTERVALS"
+OUTPUT="./hapCaller"
+mkdir hapCaller
 
 # Variant calling with snp reference, intervals and bamout to show realigned reads
 # --dbsnp 1303/mgp.v3.snps.rsIDdbSNPv137.vcf.gz
 gatk --java-options "-xmx4g" haplotypecaller \
-    --dbsnp $DBSNP/mgp.v3.snps.rsiddbsnpv137.vcf.gz \
-    --intervals $INTERVALS/mm_intervals.list \
-    -r $GENOME_PATH/mus_musculus.grcm38.dna.primary_assembly.fa \
-    -i $DATA_PATH/tumor_sorted_markdup_recal.bam \
-    -o tumor.vcf.gz \
-    -bamout tumor_Hapbamout.bam
-
-# Variant calling with snp reference, intervals and bamout to show realigned reads
-# --dbsnp 1807/mgp.v6.merged.norm.snp.indels.sfiltered.vcf.gz
-# Failed because of "The provided VCF file is malformed"
-# gatk --java-options "-Xmx4g" HaplotypeCaller \
-    # --dbsnp /LVM_data/pinjouwu9325/ref/mm10/sanger/1807/mgp.v6.merged.norm.snp.indels.sfiltered.vcf.gz \
-    # --intervals ./intervals.list \
-    # -R /LVM_data/pinjouwu9325/ref/mm10/ensembl/Mus_musculus.GRCm38.dna.primary_assembly.fa \
-    # -I ../mapped_reads/grcm38/MTCR1_sorted_markDup_recal.bam \
-    # -O MTCQ1_wMergedSnpRef.vcf.gz \
-  #   -bamout MTCQ1_haplo_bamout.bamout
+    --dbsnp $KNOWN_VARIANTS_PATH/Homo_sapiens_assembly38.dbsnp138.vcf \
+    --intervals $INTERVALS/intervals.list \
+    -R $GENOME_PATH/Homo_sapiens_assembly38.fasta \
+    -I $DATA_PATH/tumor_sorted_markdup_recal.bam \
+    -O $OUTPUT/tumor.raw.vcf.gz \
+    -bamout $OUTPUT/tumor_Hapbamout.bam

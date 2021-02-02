@@ -17,8 +17,8 @@ KNOWN_VARIANTS_PATH="PATH-to-KNOWN-VARIANTS"
 
 # Dataset and output
 DATA_PATH="./hapCaller"
-OUTPUT_VQSR="./vqsr"
-mkdir vqsr
+OUTPUT_VQSR="./hapCaller/vqsr"
+mkdir ./hapCaller/vqsr
 
 # SNP
 # 1. Build the models

@@ -15,7 +15,7 @@ GENOME_PATH="PATH-to-GENOME-FASTA"
 CACHE_PATH="~/.vep"
 
 # Dataset
-DATA_PATH="PATH-to-ANALYSIS-READY-VARIANTS"
+DATA_PATH="./hapCaller"
 OUTPUT="./annotated"
 mkdir annotated
 
@@ -27,7 +27,7 @@ vep -i $DATA_PATH/tumor.final.vcf.gz \
     --fork 8 \
     --offline \
     --format vcf \
-    --fasta  $GENOME_PATH/homo_sapiens.grch38.dna.primary_assembly.fa.gz \
+    --fasta  $GENOME_PATH/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz \
     -o $OUTPUT/tumor.variant_effect.vcf
 
 # Extract the info in EXTRA column in the annotated vcf
